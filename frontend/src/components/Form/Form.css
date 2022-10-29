@@ -1,0 +1,48 @@
+.form {
+    position: absolute;
+    max-width: 430px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+  
+  .form.signup {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .forms.show-signup .form.signup {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .forms.show-signup .form.login {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  header {
+    font-size: 28px;
+    font-weight: 600;
+    color: #232836;
+    text-align: center;
+  }
+  
+  form {
+    margin-top: 30px;
+  }
+  
+  .form .field {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+  }
+
+  @media screen and (max-width: 400px) {
+    .form {
+      padding: 15px 10px;
+    }
+  }
