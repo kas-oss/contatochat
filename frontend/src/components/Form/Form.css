@@ -1,3 +1,13 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4070f4;
+  column-gap: 30px;
+}
+
 .form {
     position: absolute;
     max-width: 430px;

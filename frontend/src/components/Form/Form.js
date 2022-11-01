@@ -1,16 +1,17 @@
 import './Form.css'
 
-const Form = ({children, onSubmit}) => {
+const Form = ({ children, onSubmit, headerText }) => {
     return (
-        <div className="form login">
-            <div className="form-content">
-                <header>Login</header>
-                <form onSubmit={onSubmit}>
-                    {children}
-                </form>
-
+        <section className="container forms">
+            <div className="form login">
+                <div className="form-content">
+                    <header>{headerText}</header>
+                    <form onSubmit={onSubmit}>
+                        {children}
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
     )
 }
 
