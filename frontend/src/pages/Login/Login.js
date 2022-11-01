@@ -22,7 +22,7 @@ const Login = () => {
                 <Input type="email" name="email" placeholder="Email" className="input" />
                 <Input type="password" name="password" placeholder="Senha" className="password" />
                 <Button text="Login"/>
-                <LinkForm message='Não possui uma conta?' link='/' textLink='Cadastre-se'/>
+                <LinkForm message='Não possui uma conta? ' link='/cadastro' textLink='Cadastre-se'/>
             </Form>
     )
 }

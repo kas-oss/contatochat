@@ -33,7 +33,7 @@ const Registration = () => {
             <ErrorForm text={error}/>
             
             <Button text="Cadastrar"/>
-            <LinkForm message='Já possui uma conta? ' link="/" textLink="Login" />
+            <LinkForm message='Já possui uma conta? ' link="/login" textLink="Login" />
         </Form>
     )
 }

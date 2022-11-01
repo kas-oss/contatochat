@@ -1,12 +1,12 @@
 import './App.css';
 import UserContextProvider from './hooks/UserContext';
-import Login from './pages/Login/Login'
-import Registration from './pages/Registration/Registration';
+import RoutesPage from './Routes';
+
 
 function App() {
   return (
     <UserContextProvider>
-      <Registration />
+      <RoutesPage />
     </UserContextProvider>
   );
 }
