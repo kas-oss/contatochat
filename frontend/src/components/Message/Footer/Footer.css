@@ -1,0 +1,31 @@
+.chat-box-input {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background: #f0f0f0;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chat-box-input ion-icon {
+    cursor: pointer;
+    font-size: 1.8em;
+    color: #51585c;
+  
+  }
+  .chat-box-input ion-icon:nth-child(1) {
+    margin-right: 15px;
+  }
+  
+  .chat-box-input input {
+    position: relative;  
+    width: 90%;
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+  }

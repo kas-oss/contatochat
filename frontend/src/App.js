@@ -1,4 +1,3 @@
-import './App.css';
 import UserContextProvider from './hooks/UserContext';
 import RoutesPage from './Routes';
 
