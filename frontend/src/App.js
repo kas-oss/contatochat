@@ -1,5 +1,5 @@
 import UserContextProvider from './hooks/UserContext';
-import RoutesPage from './Routes';
+import RoutesPage from './routes';
 
 
 function App() {
