@@ -11,13 +11,20 @@ namespace CONTATOCHAT_API.Controllers
     {
         private static List<NovoContato> contatos = new List<NovoContato>();
 
+        [HttpGet]
+        [Route("teste")]
+        public string teste()
+        {
+            return "Olá mundo! ";
+        }
+
         [HttpPost]
         [Route("Create")]
         public string Create([FromBody] NovoContato contato)
         {
-            contatos.Add(contato);
+            //contatos.Add(contato);
             return "foi ";
-            
+
         }
 
         [HttpPost]
