@@ -8,9 +8,9 @@ const RoutesPage = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/cadastro" element={<Registration />} />
-                <Route path='/' element={<Chat />} />
+                <Route path='/chat' element={<Chat />} />
                 <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
         </BrowserRouter>

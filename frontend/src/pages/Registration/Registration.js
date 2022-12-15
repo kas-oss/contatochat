@@ -5,11 +5,12 @@ import ErrorForm from "../../components/Errors/ErrorForm/ErrorForm"
 import Form from "../../components/Form/Form"
 import Input from "../../components/Inputs/Input/Input"
 import LinkForm from "../../components/Links/LinkForm/LinkForm"
+import apiRoutes from "../../services/backend"
 
 const Registration = () => {
     const [error, setError] = useState('')
 
-    const onSubmit = (e) =>{        
+    const onSubmit = async (e) =>{        
         e.preventDefault()
         const name = e.target.name.value.trim()
         const email = e.target.email.value.trim()
@@ -20,7 +21,12 @@ const Registration = () => {
         if(pass !== confirmPass){
             setError('Senhas não são iguais')
         }
-        console.log(name, email, phone, pass, confirmPass)        
+        else {
+         const res = await apiRoutes.registration({name, email, phone, pass, confirmPass});
+         console.log(res);
+        }
+        // console.log(name, email, phone, pass, confirmPass)  
+
     }
 
     return (
