@@ -19,14 +19,14 @@ const Login = () => {
         e.preventDefault()
 
         const email = e.target.email.value.trim()
-        const pass = e.target.password.value.trim()
+        const password = e.target.password.value.trim()
 
-        if (email.length <= 0 || pass.length <= 0) {
+        if (email.length <= 0 || password.length <= 0) {
             setError('Todos os campos precisam estar preenchidos.')
         }
         else {
             try {
-                await login(email, pass);
+                await login(email, password);
                 navigate('/')
             } catch (error) {
                 console.log(error)

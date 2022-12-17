@@ -6,18 +6,18 @@ export const UserContext = createContext()
 const UserContextProvider = ({ children }) => {
 
     const userToken = localStorage.getItem('userToken')
-    const [user, setUser] = useState(userToken)
+    const [user, setUser] = useState(JSON.parse(userToken))
 
     const registration = async (name, email, phone, pass, confirmPass) => {
         const res = await apiRoutes.registration({ name, email, phone, pass, confirmPass });
         setUser(res.data)
-        localStorage.setItem('userToken', res.data)
+        localStorage.setItem('userToken', JSON.stringify(res.data))
     }
 
-    const login = async (email, pass) => {
-        const res = await apiRoutes.registration({ email, pass });
+    const login = async (email, password) => {
+        const res = await apiRoutes.login({ login: email, password });
         setUser(res.data)
-        localStorage.setItem('userToken', res.data)
+        localStorage.setItem('userToken', JSON.stringify(res.data))
     }
 
     const logout = () => {
