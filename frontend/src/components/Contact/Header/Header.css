@@ -13,6 +13,16 @@
     padding: 0 15px;
 }
 
+.leftSide .header .user {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #111;
+}
+
+.leftSide .header .logout {
+    color: red;
+    cursor: pointer;
+}
 
 .user-img {
     position: relative;
@@ -45,5 +55,3 @@
     font-size: 1.5em;
     margin-left: 22px;
 }
-
-

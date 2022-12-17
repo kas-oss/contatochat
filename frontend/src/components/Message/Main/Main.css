@@ -19,7 +19,7 @@
     text-align: right;
     max-width: 65%;
     padding: 12px;
-    background: #dcf8c6;
+    background: var(--my-message-collor-light);
     border-radius: 10px;
     font-size: 0.9em;
 }
@@ -31,7 +31,7 @@
     right: -12px;
     width: 20px;
     height: 20px;
-    background: linear-gradient(135deg, #dcf8c6 0%, #dcf8c6 50%, transparent 50%, transparent);
+    background: linear-gradient(135deg,var(--my-message-collor-light) 0%, var(--my-message-collor-light) 50%, transparent 50%, transparent);
 }
 
 .chat-box .message p span {
@@ -50,7 +50,7 @@
 }
 
 .friend-message p {
-    background: #fff !important;
+    background: var(--main-collor-light) !important;
     text-align: left !important;
 }
 
@@ -61,5 +61,5 @@
     left: -12px;
     width: 20px;
     height: 20px;
-    background: linear-gradient(225deg, #fff 0%, #fff 50%, transparent 50%, transparent);
+    background: linear-gradient(225deg,var(--main-collor-light) 0%, var(--main-collor-light) 50%, transparent 50%, transparent);
 }

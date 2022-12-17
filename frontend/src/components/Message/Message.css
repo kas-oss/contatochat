@@ -13,7 +13,7 @@
 .containerChat .rightSide {
   position: relative;
   flex: 70%;
-  background: #e5ddd5;
+  background: var(--second-collor-light);
 
 }
 

@@ -7,3 +7,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --background-collor: #4070f4;
+  --main-collor-light: #fff;
+  --second-collor-light: #ededed;
+  /*--my-message-collor: #06d755;*/
+  --my-message-collor: #4070f4;
+  --my-message-collor-light: #afc2ffd1;
+  --header-collor: #f0f1ff;  
+}

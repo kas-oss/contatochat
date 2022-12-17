@@ -9,7 +9,7 @@
 .containerChat .leftSide {
     position: relative;
     flex: 30%;
-    background: #fff;
+    background: var(--main-collor-light);
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 

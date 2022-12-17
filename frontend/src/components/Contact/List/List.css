@@ -62,7 +62,7 @@
 }
 
 .chat-list .block.unread .details .list-head .time {
-    color: #06d755;
+    color: var(--my-message-collor);
 }
 
 .message-p {
@@ -82,8 +82,8 @@
 }
 
 .message-p b {
-    background: #06d755;
-    color: #fff;
+    background: var(--my-message-collor);
+    color: var(--main-collor-light);
     min-width: 20px;
     height: 20px;
     border-radius: 50%;
