@@ -16,7 +16,8 @@ const api = axios.create({
 
 const apiRoute = {
     //registration: (user) => api.get("/Account/teste")   
-    registration: (user) => api.post("/Account/Create", JSON.stringify(user))   
+    registration: (user) => api.post("/Account/Create", JSON.stringify(user)),
+    login: (user) => api.post("/Account/Login", JSON.stringify(user)),  
 }
 
 export default apiRoute

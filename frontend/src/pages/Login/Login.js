@@ -1,29 +1,46 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../hooks/UserContext'
 
 import Form from '../../components/Form/Form'
 import Input from '../../components/Inputs/Input/Input'
 import Button from '../../components/Button/Button'
-import { UserContext } from '../../hooks/UserContext'
 import LinkForm from '../../components/Links/LinkForm/LinkForm'
 
 
-const Login = () => {
-    const user = useContext(UserContext) 
 
-    const onSubmit = (e) =>{        
+const Login = () => {
+    const { login } = useContext(UserContext)
+    const [error, setError] = useState('')
+    const navigate = useNavigate()
+
+    const onSubmit = async (e) => {
         e.preventDefault()
-        const email = e.target.email.value
-        const password = e.target.password.value
-        user.login(email, password)        
+
+        const email = e.target.email.value.trim()
+        const pass = e.target.password.value.trim()
+
+        if (email.length <= 0 || pass.length <= 0) {
+            setError('Todos os campos precisam estar preenchidos.')
+        }
+        else {
+            try {
+                await login(email, pass);
+                navigate('/')
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
-    return (        
-            <Form headerText='Login' onSubmit={onSubmit}>
-                <Input type="email" name="email" placeholder="Email" className="input" />
-                <Input type="password" name="password" placeholder="Senha" className="password" />
-                <Button text="Login"/>
-                <LinkForm message='Não possui uma conta? ' link='/cadastro' textLink='Cadastre-se'/>
-            </Form>
+    return (
+        <Form headerText='Login' onSubmit={onSubmit}>
+            <Input type="email" name="email" placeholder="Email" className="input" />
+            <Input type="password" name="password" placeholder="Senha" className="password" />
+            <Button text="Login" />
+            <LinkForm message='Não possui uma conta? ' link='/cadastro' textLink='Cadastre-se' />
+        </Form>
     )
 }
 
