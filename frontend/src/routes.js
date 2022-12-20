@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login/Login'
 import Registration from './pages/Registration/Registration';
 import Chat from './pages/Chat/Chat';
-import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const RoutesPage = () => {
     return (

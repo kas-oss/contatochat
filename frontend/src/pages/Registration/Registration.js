@@ -41,6 +41,7 @@ const Registration = () => {
                 await registration(name, email, phone, pass, confirmPass);
                 navigate('/')
             } catch (error) {
+                setError('Algo deu errado tente novamente.')
                 console.log(error)
             }
         }

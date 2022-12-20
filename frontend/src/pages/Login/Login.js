@@ -7,6 +7,7 @@ import Form from '../../components/Form/Form'
 import Input from '../../components/Inputs/Input/Input'
 import Button from '../../components/Button/Button'
 import LinkForm from '../../components/Links/LinkForm/LinkForm'
+import ErrorForm from '../../components/Errors/ErrorForm/ErrorForm'
 
 
 
@@ -16,7 +17,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const onSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault()        
 
         const email = e.target.email.value.trim()
         const password = e.target.password.value.trim()
@@ -29,6 +30,7 @@ const Login = () => {
                 await login(email, password);
                 navigate('/')
             } catch (error) {
+                setError('Algo deu errado tente novamente.')
                 console.log(error)
             }
         }
@@ -38,6 +40,8 @@ const Login = () => {
         <Form headerText='Login' onSubmit={onSubmit}>
             <Input type="email" name="email" placeholder="Email" className="input" />
             <Input type="password" name="password" placeholder="Senha" className="password" />
+            <ErrorForm text={error} />
+
             <Button text="Login" />
             <LinkForm message='Não possui uma conta? ' link='/cadastro' textLink='Cadastre-se' />
         </Form>
