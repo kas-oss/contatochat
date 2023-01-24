@@ -1,10 +1,6 @@
-import { useContext } from 'react'
-import { UserContext } from '../../../hooks/UserContext'
 import './Header.css'
 
-const Header = () =>{
-    const { logout } = useContext(UserContext)
-
+const Header = ({ logout }) =>{
     return(
         <div className="header">
             <span className='user'>Daniel Caitano</span>

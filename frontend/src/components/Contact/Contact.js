@@ -4,12 +4,12 @@ import Header from './Header/Header'
 import Search from './Search/Search'
 import List from './List/List'
 
-const Contact = () => {
+const Contact = ({ logout }) => {
   return (
     <div className="leftSide">
-      <Header />
+      <Header logout={logout} />
       <Search />
-      <List/>
+      <List />
     </div>
   )
 }

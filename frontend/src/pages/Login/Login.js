@@ -9,8 +9,6 @@ import Button from '../../components/Button/Button'
 import LinkForm from '../../components/Links/LinkForm/LinkForm'
 import ErrorForm from '../../components/Errors/ErrorForm/ErrorForm'
 
-
-
 const Login = () => {
     const { login } = useContext(UserContext)
     const [error, setError] = useState('')
