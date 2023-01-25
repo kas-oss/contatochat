@@ -18,6 +18,10 @@ const apiRoute = {
     //registration: (user) => api.get("/Account/teste")   
     registration: (user) => api.post("/Account/Create", JSON.stringify(user)),
     login: (user) => api.post("/Account/Login", JSON.stringify(user)),  
+    loadMessage: () => api.post("Chat/EnviarMensagem", JSON.stringify({
+        id: "1",
+        message: "olá"
+    }))
 }
 
 export default apiRoute
