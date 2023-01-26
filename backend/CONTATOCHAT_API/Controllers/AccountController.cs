@@ -1,4 +1,5 @@
 ﻿using CONTATOCHAT_API.Models;
+using CONTATOCHAT_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,39 +10,56 @@ namespace CONTATOCHAT_API.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        private static List<NovoContato> contatos = new List<NovoContato>();
+        readonly IUsuarioService _usuarioService;
 
-        [HttpGet]
-        [Route("teste")]
-        public string teste()
+
+        public AccountController(IUsuarioService usuarioService)
         {
-            return "Olá mundo! ";
+            _usuarioService = usuarioService;
         }
 
-        [HttpPost]
-        [Route("Create")]
-        public string Create([FromBody] NovoContato contato)
-        {
-            //contatos.Add(contato);
-            return "foi ";
-
-        }
 
         [HttpPost]
         [Route("Login")]
         public LoginResult Login([FromBody] ContatoLogin login)
         {
-
-
             var loginResult = new LoginResult();
 
             return loginResult;
         }
 
-        [HttpGet]
-        public IEnumerable<NovoContato> RetornarContatos()
+
+        [HttpPost]
+        [Route("Create")]
+        public int Create([FromBody] NovoContato contato)
         {
+            var result = 0;
+
+            try
+            {
+                result = _usuarioService.RegistrarContato(contato);
+            }
+
+            catch(Exception ex)
+            {
+                result = -1;
+            }
+
+            return result;
+        }
+
+
+        [HttpGet]
+        [Route("ListUser")]
+        public List<Contato> RetornarContatos()
+        {
+
+            var contatos = _usuarioService.ListUsuarios();
+
             return contatos;
         }
+
+
+
     }
 }

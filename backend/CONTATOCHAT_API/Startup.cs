@@ -1,16 +1,14 @@
+using CONTATOCHAT_API.Data;
+using CONTATOCHAT_API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace CONTATOCHAT_API
 {
@@ -26,12 +24,24 @@ namespace CONTATOCHAT_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            DBContext.ConnectionString = Configuration.GetConnectionString("ChatConnection");
+
+            services.AddDbContext<ApplicationDbContext> (
+                options =>
+                {
+                    options.UseMySQL(DBContext.ConnectionString);
+                },
+                ServiceLifetime.Scoped);
+
             services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CONTATOCHAT_API", Version = "v1" });
             });
+
+            services.AddScoped<IUsuarioService, UsuarioService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +53,7 @@ namespace CONTATOCHAT_API
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
             });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

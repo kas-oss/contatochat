@@ -13,6 +13,7 @@ namespace CONTATOCHAT_API
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Iniciando");
             CreateHostBuilder(args).Build().Run();
         }
 

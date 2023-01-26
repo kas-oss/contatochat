@@ -1,20 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CONTATOCHAT_API.Models
 {
     public class Contato
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string nome {get; set;}
+        public string name {get; set;}
 
         public string email { get; set;}
 
-        public string telefone { get; set;}
+        public string phone { get; set;}
 
-        public string senha { get; set;}
-
-        public string foto_perfil { get; set;}
+        public string profilePicture { get; set;}
 
     }
 
@@ -62,5 +61,7 @@ namespace CONTATOCHAT_API.Models
         public string profilePicture { get; set; }
 
         public bool resultLogin { get; set; }
+
+        public List<Contato> list { get;set; }
     }
 }
