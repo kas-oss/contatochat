@@ -1,6 +1,7 @@
 ﻿using CONTATOCHAT_API.Models;
 using CONTATOCHAT_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 
@@ -12,50 +13,68 @@ namespace CONTATOCHAT_API.Controllers
     {
         readonly IUsuarioService _usuarioService;
 
-
         public AccountController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
 
-
         [HttpPost]
         [Route("Login")]
         public Sessao Login([FromBody] UsuarioLogin login)
         {
-            var loginResult = new Sessao();
-
-            return loginResult;
+            var sessao = new Sessao();
+            Usuario testLogin = null;
+            try
+            {
+                testLogin = _usuarioService.TestLogin(login);
+            }
+            catch(Exception ex)
+            {
+                // faz nada
+            }
+            if (testLogin != null)
+            {
+                sessao.usuario      = testLogin;
+                sessao.contatoList  = RetornarContatos();
+                sessao.conversaList = RetornarConvesasPorId(sessao.usuario.id);
+            } 
+            return sessao;
         }
-
 
         [HttpPost]
         [Route("Registro")]
         public Sessao RegistrarUsuario([FromBody] NovoUsuario usuario)
         {
-            var idUsuario = 0;
-            
             var registro = new Sessao();
-
-            registro.usuario = new Usuario();
 
             try
             {
-                idUsuario = _usuarioService.RegistrarUsuario(usuario);
+                var idUsuario = _usuarioService.RegistrarUsuario(usuario);
+
+                registro.usuario     = RetornarUsuario(idUsuario);
                 
                 registro.contatoList = RetornarContatos();
 
-                //registro.conversaList = RetornarConvesasPorId(idUsuario);
+                registro.conversaList = RetornarConvesasPorId(idUsuario);
 
             }
             catch (Exception ex)
             {
-                registro.usuario.id = -1;
+                registro.usuario = new Usuario
+                {
+                    id = -1
+                };
             }
 
             return registro;
         }
 
+        private Usuario RetornarUsuario(int id)
+        {
+            var usuario = _usuarioService.ConsultarUsuarioId(id);
+
+            return usuario;
+        }
 
         [HttpGet]
         [Route("ListContatos")]
@@ -76,8 +95,5 @@ namespace CONTATOCHAT_API.Controllers
 
             return contatos;
         }
-
-
-
     }
 }

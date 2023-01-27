@@ -17,6 +17,8 @@ namespace CONTATOCHAT_API.Models
         public string name { get; set; }
         public string email { get; set;}
         public string telefone { get; set;}
+        public string fotoPerfil { get; set; }
+
     }
 
     public class Contato

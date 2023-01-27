@@ -21,21 +21,7 @@ namespace CONTATOCHAT_API.Data
             _context = context;
         }
 
-        public DataTable ListContato()
-        {
-            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarContatos");
-
-            DataTable dataTable = new DataTable("usuarios");
-            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-            adapter.Fill(dataTable);
-
-            if (_internalSession)
-            {
-                _context.CloseConnection();
-            }
-
-            return dataTable;
-        }
+        #region "Serviços de Usuário"
 
         public int RegistrarUsuario(NovoUsuario contato)
         {
@@ -64,6 +50,74 @@ namespace CONTATOCHAT_API.Data
 
             return result;
         }
+        public DataTable ConsultarUsuario(int id)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarUsuario");
+            command.Parameters.AddWithValue("@id", id);
 
+            DataTable dataTable = new DataTable("usuarios");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            if (_internalSession)
+            {
+                _context.CloseConnection();
+            }
+
+            return dataTable;
+        }
+
+        public DataTable TestLogin(UsuarioLogin login)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("testLogin");
+            command.Parameters.AddWithValue("@login", login.login);
+            command.Parameters.AddWithValue("@pass", login.password);
+
+            DataTable dataTable = new DataTable("usuarios");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            if (_internalSession)
+            {
+                _context.CloseConnection();
+            }
+
+            return dataTable;
+        }
+
+        public DataTable ListContato()
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarContatos");
+
+            DataTable dataTable = new DataTable("contatos");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            if (_internalSession)
+            {
+                _context.CloseConnection();
+            }
+
+            return dataTable;
+        }
+
+        public DataTable ListConversa(int id)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarConversas");
+            command.Parameters.AddWithValue("@id", id);
+
+            DataTable dataTable = new DataTable("conversas");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            if (_internalSession)
+            {
+                _context.CloseConnection();
+            }
+
+            return dataTable;
+        }
+
+        #endregion
     }
 }
