@@ -11,25 +11,6 @@ namespace CONTATOCHAT_API.Models
         public string tipoConteudo { get; set; }
     }
 
-    public class Usuario
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string email { get; set;}
-        public string telefone { get; set;}
-        public string fotoPerfil { get; set; }
-
-    }
-
-    public class Contato
-    {
-        public int id { get; set; }
-        public string nome { get; set; }
-        public string email { get; set; }
-        public string telefone { get; set; }
-        public string fotoPerfil { get; set; }
-    }
-
     public class Conversa
     {
         public int id { get; set; }
@@ -39,11 +20,14 @@ namespace CONTATOCHAT_API.Models
         public List<Mensagem> mensagemList { get; set; }
     }
 
-    public class Sessao
+    public class ConversaCreate
     {
-        public Usuario usuario { get; set; }
-        public List<Conversa> conversaList { get; set; }
-        public List<Contato> contatoList { get; set; }
+        public int id { get; set; }
+        public string nome { get; set; }
+        public string foto { get; set; }
+        public int participante1 { get; set; }
+        public int participante2 { get; set; }
     }
+
 
 }

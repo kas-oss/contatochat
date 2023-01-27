@@ -50,6 +50,31 @@ namespace CONTATOCHAT_API.Data
 
             return result;
         }
+
+
+        public DataTable CriarConversa(ConversaCreate conversaCreate)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("criarConversa");
+            command.Parameters.AddWithValue("@nome", conversaCreate.nome);
+            command.Parameters.AddWithValue("@foto_conversa", conversaCreate.foto);
+            command.Parameters.AddWithValue("@participante1_id", conversaCreate.participante1);
+            command.Parameters.AddWithValue("@participante2_id", conversaCreate.participante2);
+
+
+            DataTable dataTable = new DataTable("convesa");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+
+            if (_internalSession)
+            {
+                _context.Commit();
+                _context.CloseConnection();
+            }
+
+            return dataTable;
+        }
+
+
         public DataTable ConsultarUsuario(int id)
         {
             MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarUsuario");

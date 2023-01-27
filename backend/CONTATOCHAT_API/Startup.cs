@@ -41,6 +41,7 @@ namespace CONTATOCHAT_API
             });
 
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IChatService, ChatService>();
 
         }
 

@@ -1,7 +1,6 @@
 ﻿using CONTATOCHAT_API.Models;
 using CONTATOCHAT_API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 
