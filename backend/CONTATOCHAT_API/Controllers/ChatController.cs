@@ -10,31 +10,14 @@ namespace CONTATOCHAT_API.Controllers
     public class ChatController : ControllerBase
     {
 
-        // Conexão com banco
-        private static List<NovoContato> contatos = new List<NovoContato>();
-
         [HttpPost]
         [Route("EnviarMensagem")]
-        public MensagemList EnviarMensagem()
+        public Conversa EnviarMensagem()
         {
+            var conversa = new Conversa(); 
 
-            var msgList = new MensagemList(); 
-
-            return msgList;
+            return conversa;
         }
-
-        [HttpPost]
-        [Route("getMensagens")]
-        public MensagemList getMensagensById(string id)
-        {
-
-            var msgList = new MensagemList();
-
-            return msgList;
-        }
-
-
-
 
     }
 }

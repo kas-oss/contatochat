@@ -21,26 +21,6 @@ namespace CONTATOCHAT_API.Data
             _context = context;
         }
 
-        public DataView ListUsuario()
-        {
-            DataSet dataSet;
-            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("RegistrarContato");
-            dataSet = _context.SearchQueryDataSet(command, "executivo");
-
-            if (_internalSession)
-            {
-                _context.CloseConnection();
-            }
-
-            return dataSet.Tables["executivo"].DefaultView;
-        }
-
-
-
-
-
-
-
         public DataTable ListUsuarios()
         {
             MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarUsuarios");

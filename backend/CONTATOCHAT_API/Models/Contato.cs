@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CONTATOCHAT_API.Models
 {
-    public class Contato
+    public class Contato3
     {
         public int id { get; set; }
 
