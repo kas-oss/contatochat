@@ -6,7 +6,8 @@ namespace CONTATOCHAT_API.Services
     public interface IUsuarioService
     {
 
-        List<Contato> ListUsuarios();
-        int RegistrarContato(NovoContato contato);
+        List<Contato> ListContato();
+        int RegistrarUsuario(NovoUsuario usuario);
+        List<Conversa> ListConvesaId(int id);
     }
 }

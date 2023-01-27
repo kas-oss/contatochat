@@ -21,9 +21,9 @@ namespace CONTATOCHAT_API.Data
             _context = context;
         }
 
-        public DataTable ListUsuarios()
+        public DataTable ListContato()
         {
-            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarUsuarios");
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarContatos");
 
             DataTable dataTable = new DataTable("usuarios");
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -37,9 +37,9 @@ namespace CONTATOCHAT_API.Data
             return dataTable;
         }
 
-        public int RegistrarContato(NovoContato contato)
+        public int RegistrarUsuario(NovoUsuario contato)
         {
-            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("RegistrarContato");
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("RegistrarUsuario");
             command.Parameters.AddWithValue("@nome", contato.name);
             command.Parameters.AddWithValue("@email", contato.email);
             command.Parameters.AddWithValue("@telefone", contato.phone);

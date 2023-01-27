@@ -3,22 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CONTATOCHAT_API.Models
 {
-    public class Contato3
-    {
-        public int id { get; set; }
 
-        public string name {get; set;}
-
-        public string email { get; set;}
-
-        public string phone { get; set;}
-
-        public string profilePicture { get; set;}
-
-    }
-
-
-    public class NovoContato
+    public class NovoUsuario
     {
         [Required(ErrorMessage = "É preciso informar o nome")]
         public string name { get; set; }
@@ -41,27 +27,12 @@ namespace CONTATOCHAT_API.Models
 
     }
 
-    public class ContatoLogin
+    public class UsuarioLogin
     {
         [Required(ErrorMessage = "É preciso informar o login")]
         public string login { get; set; }
 
         [Required(ErrorMessage = "É preciso informar a senha")]
         public string password { get; set; }
-    }
-
-    public class LoginResult
-    {
-        public string name { get; set; }
-
-        public string email { get; set; }
-
-        public string telefone { get; set; }
-
-        public string profilePicture { get; set; }
-
-        public bool resultLogin { get; set; }
-
-        public List<Contato> list { get;set; }
     }
 }

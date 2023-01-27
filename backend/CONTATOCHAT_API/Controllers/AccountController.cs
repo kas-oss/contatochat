@@ -21,40 +21,58 @@ namespace CONTATOCHAT_API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public LoginResult Login([FromBody] ContatoLogin login)
+        public Sessao Login([FromBody] UsuarioLogin login)
         {
-            var loginResult = new LoginResult();
+            var loginResult = new Sessao();
 
             return loginResult;
         }
 
 
         [HttpPost]
-        [Route("Create")]
-        public int Create([FromBody] NovoContato contato)
+        [Route("Registro")]
+        public Sessao RegistrarUsuario([FromBody] NovoUsuario usuario)
         {
-            var result = 0;
+            var idUsuario = 0;
+            
+            var registro = new Sessao();
+
+            registro.usuario = new Usuario();
 
             try
             {
-                result = _usuarioService.RegistrarContato(contato);
-            }
+                idUsuario = _usuarioService.RegistrarUsuario(usuario);
+                
+                registro.contatoList = RetornarContatos();
 
-            catch(Exception ex)
+                //registro.conversaList = RetornarConvesasPorId(idUsuario);
+
+            }
+            catch (Exception ex)
             {
-                result = -1;
+                registro.usuario.id = -1;
             }
 
-            return result;
+            return registro;
         }
 
 
         [HttpGet]
-        [Route("ListUser")]
+        [Route("ListContatos")]
         public List<Contato> RetornarContatos()
         {
 
-            var contatos = _usuarioService.ListUsuarios();
+            var contatos = _usuarioService.ListContato();
+
+            return contatos;
+        }
+
+        [HttpGet]
+        [Route("ListConversas")]
+        public List<Conversa> RetornarConvesasPorId(int id)
+        {
+
+            var contatos = _usuarioService.ListConvesaId(id);
 
             return contatos;
         }

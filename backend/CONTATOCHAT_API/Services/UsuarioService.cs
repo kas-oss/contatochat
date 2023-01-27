@@ -8,9 +8,9 @@ namespace CONTATOCHAT_API.Services
     public class UsuarioService : IUsuarioService
     {
 
-        public List<Contato> ListUsuarios()
+        public List<Contato> ListContato()
         {
-            var dataTable = new Data.Chat().ListUsuarios();
+            var dataTable = new Data.Chat().ListContato();
             var contatoList = new List<Contato>();
 
             if (dataTable.Rows.Count > 0)
@@ -19,10 +19,10 @@ namespace CONTATOCHAT_API.Services
                 {
                     var contato = new Contato
                     {
-                        id      = Convert.ToInt32(row["id"]),
-                        name    = row["nome"].ToString(),
-                        email   = row["email"].ToString(),
-                        phone   = row["telefone"].ToString(),
+                        id       = Convert.ToInt32(row["id"]),
+                        nome     = row["nome"].ToString(),
+                        email    = row["email"].ToString(),
+                        telefone = row["telefone"].ToString(),
                     };
                     contatoList.Add(contato);
                 }
@@ -30,10 +30,19 @@ namespace CONTATOCHAT_API.Services
             return contatoList;
         }
 
-        public int RegistrarContato(NovoContato contato)
+        public List<Conversa> ListConvesaId(int id)
+        {
+            new Data.Chat();
+
+            var conversas = new List<Conversa>();
+
+            return conversas;
+        }
+
+        public int RegistrarUsuario(NovoUsuario usuario)
         {
 
-            var idContato = new Data.Chat().RegistrarContato(contato);
+            var idContato = new Data.Chat().RegistrarUsuario(usuario);
 
             return idContato;
         }
