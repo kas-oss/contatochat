@@ -1,10 +1,10 @@
 import './Header.css'
 
-const Header = () => {
+const Header = ({contactActive}) => {
     return (
         <div className="header">
             <div className="img-text"> 
-                <h4>Felipe Nascimento<br /><span>online</span></h4>
+                <h4>{contactActive.nome}</h4>
             </div>
         </div>
     )

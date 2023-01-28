@@ -1,10 +1,9 @@
 import './Footer.css'
 
-const Footer = () => {
+const Footer = ({contactActive}) => {
     return (
         <div className="chat-box-input">
-            <input type="text" placeholder="Digite sua mensagem..." />
-            <button></button>
+            {contactActive.id && <input type="text" placeholder="Digite sua mensagem..." />}
         </div>
     )
 }

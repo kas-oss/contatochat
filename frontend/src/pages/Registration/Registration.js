@@ -24,6 +24,7 @@ const Registration = () => {
         const phone = e.target.phone.value.trim()
         const pass = e.target.pass.value.trim()
         const confirmPass = e.target.confirmPass.value.trim()
+        const profilePicture = ""
 
         if (name.length <= 0 ||
             email.length <= 0 ||
@@ -38,7 +39,7 @@ const Registration = () => {
         }
         else {
             try {
-                await registration(name, email, phone, pass, confirmPass);
+                await registration(name, email, phone, pass, confirmPass, profilePicture);
                 navigate('/')
             } catch (error) {
                 setError('Algo deu errado tente novamente.')

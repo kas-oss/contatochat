@@ -1,20 +1,18 @@
 import './List.css'
 
-const List = () => {
+const List = ({ contactList, contactActive, setContactActive }) => {
     return (
         <div className="chat-list">
-            <div className="block active">
-                <div className="details">
-                    <div className="list-head">
-                        <h4>Felipe Nascimento</h4>
-                        <p className="time">14:29</p>
-                    </div>
-                    <div className="message-p">
-                        <p>Boa tarde. Só lembrando do nosso trabalho de Design-Patterns.</p>
-                        <b>2</b>
+            {contactList.map(contact => (
+                <div key={contact.id} className={`block ${contactActive.id === contact.id && "active"}`} onClick={()=> setContactActive(contact)}>
+                    <div className="details">
+                        <div className="list-head">
+                            <h4>{contact.nome}</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
+            ))
+            }
         </div>
     )
 }

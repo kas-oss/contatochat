@@ -1,9 +1,9 @@
 import './Header.css'
 
-const Header = ({ logout }) =>{
+const Header = ({ logout, user }) =>{
     return(
         <div className="header">
-            <span className='user'>Daniel Caitano</span>
+            <span className='user'>{user.name}</span>
             <span className='logout' onClick={logout}>Sair</span>
         </div>
     )

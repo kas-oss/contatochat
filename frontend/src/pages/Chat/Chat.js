@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import './Chat.css'
 
 import { UserContext } from '../../hooks/UserContext'
@@ -8,12 +8,12 @@ import Message from '../../components/Message/Message'
 
 
 const Chat = () => {
-  const { logout } = useContext(UserContext)  
-
+  const { logout, contacts, user } = useContext(UserContext)  
+  const [contactActive, setContactActive] = useState({})
   return (
     <div className="containerChat">
-      <Contacts logout={logout} />
-      <Message />
+      <Contacts logout={logout} contactList={contacts} user={user} contactActive={contactActive} setContactActive={setContactActive}/>
+      <Message contactActive={contactActive}/>
     </div>
   )
 }

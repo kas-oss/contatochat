@@ -4,7 +4,7 @@ import { UserContext } from "../../hooks/UserContext"
 
 const PrivateRoute = () =>{
     const {user} = useContext(UserContext) 
-
+    
     if(user){ 
         return <Outlet />
     }else{
