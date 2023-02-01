@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CONTATOCHAT_API.Models
 {
@@ -6,9 +7,18 @@ namespace CONTATOCHAT_API.Models
     {
         public int id { get; set; }
         public string conteudo { get; set; }
-        public string contatoId { get; set; }
-        public string conversaId { get; set; }
-        public string tipoConteudo { get; set; }
+        public int contatoId { get; set; }
+        public int conversaId { get; set; }
+        public int tipoConteudo { get; set; }
+        public DateTime dataHora { get; set; }
+    }
+
+    public class reqMensagem
+    {
+        public string conteudo { get; set; }
+        public int contatoId { get; set; }
+        public int conversaId { get; set; }
+        public int? tipoConteudo { get; set; }
     }
 
     public class Conversa

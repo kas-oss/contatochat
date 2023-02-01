@@ -2,7 +2,6 @@
 using CONTATOCHAT_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 
 namespace CONTATOCHAT_API.Controllers
 {
@@ -36,23 +35,23 @@ namespace CONTATOCHAT_API.Controllers
             return conversa;
         }
 
-        // Enviar Mensagens a fazer
-
+       
         [HttpPost]
         [Route("EnviarMensagem")]
-        public Conversa EnviarMensagem()
+        public Conversa EnviarMensagem(reqMensagem msg)
         {
-            var conversa = new Conversa();
+            _chatService.EnviarMensagem(msg);
+
+            var conversa = GetConversa(msg.conversaId);
 
             return conversa;
         }
 
-        // Listar Mensagens a fazer
-        [HttpPost]
-        [Route("ListarMensagens")]
-        public Conversa ListMensagens(int id)
+        [HttpGet]
+        [Route("GetConversa")]
+        public Conversa GetConversa(int id)
         {
-            var conversa = new Conversa();
+            var conversa = _chatService.GetConversa(id);
 
             return conversa;
         }

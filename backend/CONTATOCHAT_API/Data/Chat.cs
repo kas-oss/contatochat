@@ -62,14 +62,10 @@ namespace CONTATOCHAT_API.Data
             command.Parameters.AddWithValue("@participante2_id", conversaCreate.participante2);
 
             DataSet dt = new DataSet("conversa");
-            //DataTable dataTable = new DataTable("convesa");
-
 
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
             adapter.Fill(dt);
-
-            //adapter.Fill(dataTable);
 
             if (_internalSession)
             {
@@ -79,6 +75,42 @@ namespace CONTATOCHAT_API.Data
             return dt;
         }
 
+
+        public DataSet GetConversa(int id)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("listarConversaId");
+            command.Parameters.AddWithValue("@id",id);
+
+            DataSet dt = new DataSet("conversa");
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+
+            adapter.Fill(dt);
+
+            if (_internalSession)
+            {
+                _context.CloseConnection();
+            }
+
+            return dt;
+        }
+        
+
+        public void EnviarMensagem(reqMensagem msg)
+        {
+            MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("EnviarMensagem");
+            command.Parameters.AddWithValue("@contato_id", msg.contatoId);
+            command.Parameters.AddWithValue("@conversa_id", msg.conversaId);
+            command.Parameters.AddWithValue("@conteudo", msg.conteudo);
+
+            _context.ExecutaNonQuery(command);
+
+            if (_internalSession)
+            {
+                _context.Commit();
+                _context.CloseConnection();
+            }
+        }
 
         public DataTable ConsultarUsuario(int id)
         {
