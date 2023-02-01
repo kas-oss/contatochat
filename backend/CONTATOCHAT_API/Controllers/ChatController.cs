@@ -21,16 +21,19 @@ namespace CONTATOCHAT_API.Controllers
         [Route("Create")]
         public ConversaCreate CriarConversa(ConversaCreate conversaCreate)
         {
+            var conversa = new ConversaCreate();
+
             try
             {
-                var conversa = new Conversa();
+                conversaCreate.id = 0;
+                conversa = _chatService.CriarConversa(conversaCreate);
             }
             catch (Exception ex)
             {
-                var coversaCreate = _chatService.CriarConversa(conversaCreate);
+                conversa = new ConversaCreate();
             }
 
-            return conversaCreate;
+            return conversa;
         }
 
         [HttpPost]

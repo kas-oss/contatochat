@@ -22,7 +22,7 @@ namespace CONTATOCHAT_API.Models
 
     public class ConversaCreate
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string nome { get; set; }
         public string foto { get; set; }
         public int participante1 { get; set; }

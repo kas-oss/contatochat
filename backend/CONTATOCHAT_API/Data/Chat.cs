@@ -52,26 +52,31 @@ namespace CONTATOCHAT_API.Data
         }
 
 
-        public DataTable CriarConversa(ConversaCreate conversaCreate)
+        public DataSet CriarConversa(ConversaCreate conversaCreate)
         {
             MySqlCommand command = (MySqlCommand)_context.InicializeProcedure("criarConversa");
+            command.Parameters.AddWithValue("@id", conversaCreate.id);
             command.Parameters.AddWithValue("@nome", conversaCreate.nome);
             command.Parameters.AddWithValue("@foto_conversa", conversaCreate.foto);
             command.Parameters.AddWithValue("@participante1_id", conversaCreate.participante1);
             command.Parameters.AddWithValue("@participante2_id", conversaCreate.participante2);
 
+            DataSet dt = new DataSet("conversa");
+            //DataTable dataTable = new DataTable("convesa");
 
-            DataTable dataTable = new DataTable("convesa");
+
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-            adapter.Fill(dataTable);
+
+            adapter.Fill(dt);
+
+            //adapter.Fill(dataTable);
 
             if (_internalSession)
             {
-                _context.Commit();
                 _context.CloseConnection();
             }
 
-            return dataTable;
+            return dt;
         }
 
 
