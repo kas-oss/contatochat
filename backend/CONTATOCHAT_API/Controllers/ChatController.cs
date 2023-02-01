@@ -36,7 +36,7 @@ namespace CONTATOCHAT_API.Controllers
             return conversa;
         }
 
-        // Enviar Mensagens
+        // Enviar Mensagens a fazer
 
         [HttpPost]
         [Route("EnviarMensagem")]
@@ -47,7 +47,7 @@ namespace CONTATOCHAT_API.Controllers
             return conversa;
         }
 
-        // Listar Mensagens
+        // Listar Mensagens a fazer
         [HttpPost]
         [Route("ListarMensagens")]
         public Conversa ListMensagens(int id)
