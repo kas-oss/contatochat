@@ -12,8 +12,7 @@ namespace CONTATOCHAT_API.Services
 
             var dataTable = new Data.Chat().CriarConversa(conversaCreate);
             var conversa = new ConversaCreate();
-            //dataTable.Tables.Count> 0
-
+           
             if (dataTable.Tables.Count > 0)
             {
                 DataRow row1 = dataTable.Tables[1].Rows[0];

@@ -49,10 +49,7 @@ namespace CONTATOCHAT_API.Services
                 }
             }
 
-
-            var conversas = new List<Conversa>();
-
-            return conversas;
+            return conversaList;
         }
 
         public Usuario ConsultarUsuarioId(int id)

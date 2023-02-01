@@ -36,9 +36,21 @@ namespace CONTATOCHAT_API.Controllers
             return conversa;
         }
 
+        // Enviar Mensagens
+
         [HttpPost]
         [Route("EnviarMensagem")]
         public Conversa EnviarMensagem()
+        {
+            var conversa = new Conversa();
+
+            return conversa;
+        }
+
+        // Listar Mensagens
+        [HttpPost]
+        [Route("ListarMensagens")]
+        public Conversa ListMensagens(int id)
         {
             var conversa = new Conversa();
 
