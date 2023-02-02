@@ -15,8 +15,8 @@ namespace CONTATOCHAT_API.Services
            
             if (dataTable.Tables.Count > 0)
             {
-                DataRow row1 = dataTable.Tables[1].Rows[0];
-                DataRow row2 = dataTable.Tables[1].Rows[1];
+                DataRow row1 = dataTable.Tables[2].Rows[0];
+                DataRow row2 = dataTable.Tables[2].Rows[1];
 
                 conversa.id = Convert.ToInt32(row1["id"]);
                 conversa.nome = row1["nome"].ToString();

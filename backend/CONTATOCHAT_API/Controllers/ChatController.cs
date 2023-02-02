@@ -35,7 +35,6 @@ namespace CONTATOCHAT_API.Controllers
             return conversa;
         }
 
-       
         [HttpPost]
         [Route("EnviarMensagem")]
         public Conversa EnviarMensagem(reqMensagem msg)
