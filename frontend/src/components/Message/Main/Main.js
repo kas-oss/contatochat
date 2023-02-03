@@ -1,20 +1,18 @@
 import './Main.css'
 
-const Main = ({contactActive}) => {
+const Main = ({ messagesData, user }) => {
 
     return (
-        <div style={!contactActive.id ? {opacity: 0} : {}} className="chat-box">
-            <div className="message my-message">
-                <p>Oi, bom dia! <br /><span>10:18</span></p>
+        <div className="chat-box">
+            {messagesData?.mensagemList?.map(message => {
+                return <div key={message.id} className={message.contatoId === user.id? "message my-message" : "message friend-message"}>
+                    <p>{message.conteudo}<br /></p>
+                </div>
+            })
+            }
+            <div style={{ opacity: 0 }} className="message my-message">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptate commodi, corrupti provident ipsa facilis magni corporis doloribus eos quisquam tempora repellendus. Rerum, adipisci placeat consequatur iusto quidem nesciunt assumenda.<br /></p>
             </div>
-
-            <div className="message friend-message">
-                <p>Oi, bom dia! Tudo bem? <br /><span>10:19</span></p>
-            </div>
-
-            <div className="message my-message">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptate commodi, corrupti provident ipsa facilis magni corporis doloribus eos quisquam tempora repellendus. Rerum, adipisci placeat consequatur iusto quidem nesciunt assumenda.<br /><span>10:20</span></p>
-            </div>          
         </div>
     )
 }

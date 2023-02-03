@@ -4,12 +4,12 @@ import Header from './Header/Header'
 import Main from './Main/Main'
 import Footer from './Footer/Footer'
 
-const Message = ({contactActive}) => {
+const Message = ({contactActive, sendMessage, messagesData, user}) => {
   return (
     <div className="rightSide">
       <Header contactActive={contactActive}/>
-      <Main contactActive={contactActive}/>
-      <Footer contactActive={contactActive}/>
+      <Main user={user} messagesData={messagesData}/>
+      <Footer contactActive={contactActive} sendMessage={sendMessage}/>
     </div>
   )
 }

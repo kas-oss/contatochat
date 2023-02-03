@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import apiRoutes from "../services/api"
 
 export const UserContext = createContext()
@@ -11,24 +11,35 @@ const UserContextProvider = ({ children }) => {
     const contactsToken = localStorage.getItem('contactsToken')
     const [contacts, setContacts] = useState(JSON.parse(contactsToken))
 
+    const saveTokenContacts = (contatoList, userId) =>{
+        localStorage.removeItem('contactsToken')
+        const removeMyOwnContact = contatoList.filter(con => !(con.id === userId))
+        setContacts(removeMyOwnContact)
+        localStorage.setItem('contactsToken', JSON.stringify(removeMyOwnContact))
+    }
+
+    const saveTokenUser = (data) =>{
+        console.log(data)
+        setUser(data.usuario)        
+        localStorage.setItem('userToken', JSON.stringify(data.usuario)) 
+        saveTokenContacts(data.contatoList, data.usuario.id)  
+    }
+
+    const updateListContacts = useCallback(async() =>{
+        const res = await apiRoutes.listContacts();
+        saveTokenContacts(res.data, user.id)
+    },[user])
+
     const registration = async (name, email, phone, pass, confirmPass, profilePicture) => {
         logout()
         const res = await apiRoutes.registration({ name, email, phone, pass, confirmPass, profilePicture });
-        
-        setUser(res.data.usuario)
-        setContacts(res.data.contatoList)
-        localStorage.setItem('userToken', JSON.stringify(res.data.usuario))
-        localStorage.setItem('contactsToken', JSON.stringify(res.data.contatoList))
+        saveTokenUser(res.data)
     }
 
     const login = async (email, password) => {
         logout()
         const res = await apiRoutes.login({ login: email, password });
-
-        setUser(res.data.usuario)
-        setContacts(res.data.contatoList)
-        localStorage.setItem('userToken', JSON.stringify(res.data.usuario))
-        localStorage.setItem('contactsToken', JSON.stringify(res.data.contatoList))
+        saveTokenUser(res.data)
     }
 
     const logout = () => {
@@ -42,6 +53,7 @@ const UserContextProvider = ({ children }) => {
         registration, 
         user, 
         contacts, 
+        updateListContacts
     }
     return (
         <UserContext.Provider value={contextValues}>
