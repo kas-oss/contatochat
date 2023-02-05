@@ -8,7 +8,7 @@ import Contacts from '../../components/Contact/Contact'
 import Message from '../../components/Message/Message'
 
 const Chat = () => {
-  const { logout, contacts, user, updateListContacts } = useContext(UserContext)
+  const { logout, contacts, messages, user, updateListContacts, updateListMessages } = useContext(UserContext)
   const [contactActive, setContactActive] = useState({})
   const [chatInfo, setChatInfo] = useState({})
   const [messagesData, setMessagesData] = useState({})
@@ -20,63 +20,67 @@ const Chat = () => {
       conversaId: chatInfo.id,
       tipoConteudo: 0
     }
-    console.log(data)
     const res = await apiRoute.sendMessage(data)
     setMessagesData(res.data)
   }
 
   const loadMessages = useCallback(async (id) => {
-    
     try {
-      if (!id) throw new Error('Dados insuficientes M')
-      const res = await apiRoute.loadMessages(id)
-      setMessagesData(res.data)
+      if (id) {
+        const res = await apiRoute.loadMessages(id)
+        setMessagesData(res.data)
+      }
     } catch (error) {
       console.error(error)
     }
   }, [])
 
-  const loadContact = useCallback(async (nameChat, p1, p2) => {
+  const loadContact = useCallback(async (p1Name, p2Name, p1Id, p2Id) => {
+    await updateListMessages()
     try {
-      const chat = {
-        nome: nameChat,
-        foto: "string",
-        id: 0,
-        participante1: p1,
-        participante2: p2
+      let idMessage;
+      const hasChat = messages.current.find(chat => chat.nome === p1Name + p2Name || chat.nome === p2Name + p1Name)
+      if (hasChat) {
+        setChatInfo(hasChat)
+        idMessage = hasChat.id
+        setChatInfo(hasChat)
+      } else {
+        const chat = {
+          nome: p1Name + p2Name,
+          foto: "string",
+          id: 0,
+          participante1: p1Id,
+          participante2: p2Id
+        }
+        if (chat.participante2) {
+          const res = await apiRoute.loadChat(chat)
+          idMessage = res.data.id
+          setChatInfo(res.data)
+        }
       }
-      console.log(chat)
-      if (!chat.participante2) throw new Error('Dados insuficientes')
-      const res = await apiRoute.loadChat(chat)
-      setChatInfo(res.data)
-      console.log(res.data)
-      loadMessages(res.data.id)
+      loadMessages(idMessage)
+
     } catch (error) {
       console.error(error)
     }
-  }, [loadMessages])
+  }, [loadMessages, updateListMessages, messages])
 
   useEffect(() => {
-    loadContact(contactActive.nome, user.id, contactActive.id)
+    loadContact(user.name, contactActive.nome, user.id, contactActive.id)
   }, [loadContact, contactActive, user])
 
-  // useEffect(() => {
-  //   const update = setInterval(() => {
-  //     loadMessages(chatInfo.id)
-  //       .then(() => console.log('ok'))
-  //       .catch(e => console.error(e))
+  useEffect(() => {
+    const update = setInterval(() => {
+      loadMessages(chatInfo.id).catch(e => console.error(e))
+      updateListContacts().catch(e => console.error(e))
+    }, 5000);
 
-  //       updateListContacts()
-  //       .then(() => console.log('ok2'))
-  //       .catch(e => console.error(e))
-  //   }, 10000);
-
-  //   return () => clearInterval(update)
-  // }, [chatInfo, loadMessages, updateListContacts])
+    return () => clearInterval(update)
+  }, [chatInfo, loadMessages, updateListContacts])
 
   return (
     <div className="containerChat">
-      <Contacts logout={logout} contactList={contacts} user={user} contactActive={contactActive} setContactActive={setContactActive} />
+      <Contacts logout={logout} contactList={[...contacts]} user={user} contactActive={contactActive} setContactActive={setContactActive} />
       <Message user={user} sendMessage={sendMessage} messagesData={messagesData} contactActive={contactActive} />
     </div>
   )

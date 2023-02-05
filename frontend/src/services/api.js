@@ -21,7 +21,8 @@ const apiRoute = {
     loadChat: (data) => api.post("/Chat/Create", JSON.stringify(data)),
     loadMessages: (id) => api.get("/Chat/GetConversa?id="+id),
     sendMessage: (data) => api.post("Chat/EnviarMensagem", JSON.stringify(data)),
-    listContacts: () => api.get("/Account/ListContatos") 
+    listContacts: () => api.get("/Account/ListContatos"),
+    listMessages: (id) => api.get("/Account/ListConversas?id="+id), 
 }
 
 export default apiRoute

@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, useRef } from "react";
 import apiRoutes from "../services/api"
 
 export const UserContext = createContext()
@@ -11,6 +11,16 @@ const UserContextProvider = ({ children }) => {
     const contactsToken = localStorage.getItem('contactsToken')
     const [contacts, setContacts] = useState(JSON.parse(contactsToken))
 
+    const messagesToken = localStorage.getItem('messagesToken')
+    const refMessages = useRef(JSON.parse(messagesToken))
+
+
+    const saveTokenMessages = (messagesList) =>{
+        localStorage.removeItem('messagesToken')
+        refMessages.current = messagesList
+        localStorage.setItem('messagesToken', JSON.stringify(messagesList))
+    }
+
     const saveTokenContacts = (contatoList, userId) =>{
         localStorage.removeItem('contactsToken')
         const removeMyOwnContact = contatoList.filter(con => !(con.id === userId))
@@ -19,15 +29,20 @@ const UserContextProvider = ({ children }) => {
     }
 
     const saveTokenUser = (data) =>{
-        console.log(data)
         setUser(data.usuario)        
         localStorage.setItem('userToken', JSON.stringify(data.usuario)) 
         saveTokenContacts(data.contatoList, data.usuario.id)  
+        saveTokenMessages(data.conversaList)
     }
 
     const updateListContacts = useCallback(async() =>{
         const res = await apiRoutes.listContacts();
         saveTokenContacts(res.data, user.id)
+    },[user])
+
+    const updateListMessages = useCallback(async() =>{
+        const res = await apiRoutes.listMessages(user.id);
+        saveTokenMessages(res.data)
     },[user])
 
     const registration = async (name, email, phone, pass, confirmPass, profilePicture) => {
@@ -44,8 +59,11 @@ const UserContextProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null)
+        setContacts([])
+        refMessages.current = []
         localStorage.removeItem('userToken')
         localStorage.removeItem('contactsToken')
+        localStorage.removeItem('messagesToken')
     }
     const contextValues = { 
         login, 
@@ -53,7 +71,9 @@ const UserContextProvider = ({ children }) => {
         registration, 
         user, 
         contacts, 
-        updateListContacts
+        messages: refMessages,
+        updateListContacts,
+        updateListMessages
     }
     return (
         <UserContext.Provider value={contextValues}>
