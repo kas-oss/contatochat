@@ -26,17 +26,21 @@ namespace CONTATOCHAT_API.Controllers
             try
             {
                 testLogin = _usuarioService.TestLogin(login);
+                if (testLogin.email == null)
+                {
+                    HttpContext.Response.StatusCode = 400;
+                }
+                else
+                {
+                    sessao.usuario = testLogin;
+                    sessao.contatoList = RetornarContatos();
+                    sessao.conversaList = RetornarConvesasPorId(sessao.usuario.id);
+                }
             }
             catch(Exception ex)
             {
                 // faz nada
             }
-            if (testLogin != null)
-            {
-                sessao.usuario      = testLogin;
-                sessao.contatoList  = RetornarContatos();
-                sessao.conversaList = RetornarConvesasPorId(sessao.usuario.id);
-            } 
             return sessao;
         }
 
@@ -59,10 +63,9 @@ namespace CONTATOCHAT_API.Controllers
             }
             catch (Exception ex)
             {
-                registro.usuario = new Usuario
-                {
-                    id = -1
-                };
+                HttpContext.Response.StatusCode = 400;
+
+                registro = new Sessao();
             }
 
             return registro;
